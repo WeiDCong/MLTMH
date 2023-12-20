@@ -1,2 +1,2 @@
 # MLTMH
-web tool for prediction of M-H bond properties
+A web tool for prediction of M-H bond properties
