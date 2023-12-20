@@ -524,7 +524,7 @@ def callbacks(_app):
                                 ]),
                                 dbc.CardFooter('kcal/mol', style={'text-align': 'center', 'font-size': '1.2rem'})
                             ],
-                            style={"width": "18rem"},
+                            style={"width": "20rem"},
                         )
             MH_card = dbc.Card(
                             [
@@ -537,7 +537,7 @@ def callbacks(_app):
                                 ]),
                                 dbc.CardFooter(u'\u00C5', style={'text-align': 'center', 'font-size': '1.2rem'})
                             ],
-                            style={"width": "18rem"},
+                            style={"width": "20rem"},
                         )
             VMH_card = dbc.Card(
                             [
@@ -550,16 +550,16 @@ def callbacks(_app):
                                 ]),
                                 dbc.CardFooter('cm-1', style={'text-align': 'center', 'font-size': '1.2rem'})
                             ],
-                            style={"width": "18rem"},
+                            style={"width": "20rem"},
                         )
             child_1 = html.Div(
                 [
                     dbc.Alert('✅ Prediction done!', color="success"),
                     dbc.Row(
                         [
-                            dbc.Col(BDFE_card, width='auto'),
-                            dbc.Col(MH_card, width='auto'),
-                            dbc.Col(VMH_card, width='auto'),
+                            dbc.Col(BDFE_card, width='auto', style={'margin': '0 auto', 'float': 'right'}),
+                            dbc.Col(MH_card, width='auto', style={'margin': '0 auto', 'float': 'right'}),
+                            dbc.Col(VMH_card, width='auto', style={'margin': '0 auto', 'float': 'right'}),
                         ]
                     ),
 
