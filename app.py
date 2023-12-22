@@ -438,6 +438,8 @@ def callbacks(_app):
         lig_list = []
         if H is None:
             lig_list.append(1)
+        else:
+            lig_list.append(H)
         for i in [B, C, N, O, F, Si, P, S, Cl]:
             if i is None:
                 lig_list.append(0)
@@ -579,7 +581,7 @@ def callbacks(_app):
                     [
                         html.P(children=[
                                 dcc.Markdown(
-                                f'''For reference, listed below are the computed BDE values (kcal/mol) of molecules with the same __metal__, __coordination number__ and __ligand elements__.''',
+                                f'''For reference, listed below are molecules with the same __metal__, __coordination number__ and __ligand elements__.''',
                                 style={'text-align': 'center'}
                                 ),
                             ],
