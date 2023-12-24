@@ -13,6 +13,7 @@ matplotlib==3.7.0
 mdurl==0.1.2
 numpy==1.24.1
 pandas==1.5.3
+pyarrow
 plotly==5.13.0
 scikit-learn==1.2.1
 xgboost==1.6.0

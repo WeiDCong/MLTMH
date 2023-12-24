@@ -8,7 +8,7 @@ def make_predictions(input, mode, charge, numOfMH):
     model_BDFE = joblib.load('./models/BDFE_XGB_25.pkl')
     model_MH = joblib.load('./models/MH_XGB_16.pkl')
     model_VMH = joblib.load('./models/VMH_XGB_19.pkl')
-    findData = pd.read_csv("./predictors/data6153ForFind.csv")
+    findData = pd.read_feather("./predictors/data6153ForFind.feather")
     x_findSimilar = np.array(findData[['Metal', 'CoordNum', 'H', 'B', 'C', 'N', 'O', 'F', 'Si', 'P', 'S', 'Cl']]).reshape(-1,12)
     y_findSimilar = np.array(findData[['ID', 'BDE', 'M-H', 'VMH']]).reshape(-1, 4)
 
@@ -45,8 +45,11 @@ def make_predictions(input, mode, charge, numOfMH):
     return [y_pred_BDFE, y_pred_MH, y_pred_VMH], allsimilarResults
 
 def get_similarResults(similarResults):
-    formulaID = np.loadtxt('./predictors/cifFormula.log', dtype=str, delimiter=":", usecols=[0])
-    formulaSum = np.loadtxt('./predictors/cifFormula.log', dtype=str, delimiter=":", usecols=[1])
+    formulaDf = pd.read_feather('./predictors/cifFormula.feather')
+    formulaID = np.array(formulaDf['ID'])
+    formulaSum = np.array(formulaDf['Formula'])
+    #formulaID = np.loadtxt('./predictors/cifFormula.log', dtype=str, delimiter=":", usecols=[0])
+    #formulaSum = np.loadtxt('./predictors/cifFormula.log', dtype=str, delimiter=":", usecols=[1])
     Formula_list = np.array([])
     ID_list = similarResults[:,0]
     BDFE_list, MH_list, VMH_list = similarResults[:,1], similarResults[:,2], similarResults[:,3]
