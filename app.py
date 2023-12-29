@@ -526,7 +526,7 @@ def callbacks(_app):
                                 ]),
                                 dbc.CardFooter('kcal/mol', style={'text-align': 'center', 'font-size': '1.2rem'})
                             ],
-                            style={"width": "20rem"},
+                            #style={"width": "20rem"},
                         )
             MH_card = dbc.Card(
                             [
@@ -539,7 +539,7 @@ def callbacks(_app):
                                 ]),
                                 dbc.CardFooter(u'\u00C5', style={'text-align': 'center', 'font-size': '1.2rem'})
                             ],
-                            style={"width": "20rem"},
+                            #style={"width": "20rem"},
                         )
             VMH_card = dbc.Card(
                             [
@@ -552,7 +552,7 @@ def callbacks(_app):
                                 ]),
                                 dbc.CardFooter('cm-1', style={'text-align': 'center', 'font-size': '1.2rem'})
                             ],
-                            style={"width": "20rem"},
+                            #style={"width": "20rem"},
                         )
             child_1 = html.Div(
                 [
