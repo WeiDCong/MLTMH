@@ -72,7 +72,6 @@ def layout():
                                     id='metal',
                                     children=[
                                         dbc.Label('Metal'),
-                                        #dbc.FormText('Enter the element symbol of metal, e.g Fe.', color='secondary'),
                                         dbc.Input(
                                             id='metal-input',
                                             type='text',
@@ -82,11 +81,6 @@ def layout():
                                             required=True, maxlength=2,
                                             #loading_state={'is_loading': False}
                                         ),
-                                        
-                                        #dbc.FormFloating([
-                                        #    dbc.Input(type='metal', placeholder='Fe'),
-                                        #    dbc.Label('Metal (e.g. Fe)')
-                                        #])
                                     ],
                                     style={'margin-top': '1rem'}
                                 ),
