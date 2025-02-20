@@ -15,7 +15,6 @@ def run_standalone_app(
 ):
     app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
     app.scripts.config.serve_locally = True
-    # Handle callback to component with id "fullband-switch"
     app.config['suppress_callback_exceptions'] = True
 
     app_name = os.getenv('DASH_APP_NAME', '')
