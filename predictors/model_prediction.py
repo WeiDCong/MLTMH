@@ -2,8 +2,6 @@ import pandas as pd
 import numpy as np
 import joblib
 
-# 'CoordNum', 'EN-M', 'EN-B', 'EN-C', 'EN-N', 'EN-O', 'EN-F', 'EN-Si', 'EN-P', 'EN-S', 'EN-Cl', 'EA-M', 'H', 'B', 'C', 'N', 'P', 'S', 'Charge', 'LTrans', 'GrpNum'
-
 def make_predictions(input, mode, charge, numOfMH):
     model_BDFE = joblib.load('./models/BDFE_XGB_25.pkl')
     model_MH = joblib.load('./models/MH_XGB_16.pkl')
@@ -17,7 +15,6 @@ def make_predictions(input, mode, charge, numOfMH):
         x_forFind = np.array(input[0][1])
         x_forFind = x_forFind.astype('O')
         x_forFind[1:] = x_forFind[1:].astype('i')
-        #print(x_forFind)
     elif mode == 'file':
         df = pd.read_excel(input)
         if numOfMH != 0:
@@ -25,19 +22,15 @@ def make_predictions(input, mode, charge, numOfMH):
         df['Charge'] = charge
         x_inputPred = np.array(df[['CoordNum', 'EN-M', 'EN-B', 'EN-C', 'EN-N', 'EN-O', 'EN-F', 'EN-Si', 'EN-P', 'EN-S', 'EN-Cl', 'EA-M', 'H', 'B', 'C', 'N', 'P', 'S', 'Charge', 'LTrans', 'GrpNum']])
         x_forFind = np.array(df[['Metal', 'CoordNum', 'H', 'B', 'C', 'N', 'O', 'F', 'Si', 'P', 'S', 'Cl']]).flatten()
-        #print(x_forFind)
     
     x_forFind[2:] = np.where(x_forFind[2:]>0, 1, 0)
     x_forFind[0] = x_forFind[0].capitalize()
     x_BDFE, x_MH, x_VMH = x_inputPred_BDFE.reshape(-1, 25), x_inputPred_MH.reshape(-1, 16), x_inputPred_VMH.reshape(-1, 19),
-    print(x_forFind)
-    print(x_BDFE)
+
     y_pred_BDFE, y_pred_MH, y_pred_VMH = model_BDFE.predict(x_BDFE), model_MH.predict(x_MH), model_VMH.predict(x_VMH)
     y_pred_BDFE, y_pred_MH, y_pred_VMH = ('%.1f' % y_pred_BDFE), ('%.3f' % y_pred_MH), ('%.0f' % y_pred_VMH), 
 
     similarResultIdx = np.where((x_findSimilar == x_forFind).all(axis=1)) #To find the idx of element whose components all equal to the specified array
-    #print(similarResultIdx)
-    #similarResultDescrip = x_findSimilar[similarResultIdx]
     similarResult = y_findSimilar[similarResultIdx]
     allsimilarResults = get_similarResults(similarResult)
     print(similarResult)
@@ -48,8 +41,6 @@ def get_similarResults(similarResults):
     formulaDf = pd.read_feather('./predictors/cifFormula.feather')
     formulaID = np.array(formulaDf['ID'])
     formulaSum = np.array(formulaDf['Formula'])
-    #formulaID = np.loadtxt('./predictors/cifFormula.log', dtype=str, delimiter=":", usecols=[0])
-    #formulaSum = np.loadtxt('./predictors/cifFormula.log', dtype=str, delimiter=":", usecols=[1])
     Formula_list = np.array([])
     ID_list = similarResults[:,0]
     BDFE_list, MH_list, VMH_list = similarResults[:,1], similarResults[:,2], similarResults[:,3]
