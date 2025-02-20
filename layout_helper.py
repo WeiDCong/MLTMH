@@ -13,13 +13,11 @@ def run_standalone_app(
         header_colors,
         filename
 ):
-    """Run demo app (tests/dashbio_demos/*/app.py) as standalone app."""
     app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
     app.scripts.config.serve_locally = True
     # Handle callback to component with id "fullband-switch"
     app.config['suppress_callback_exceptions'] = True
 
-    ## Get all information from filename
     app_name = os.getenv('DASH_APP_NAME', '')
     if app_name == '':
         app_name = os.path.basename(os.path.dirname(filename))
@@ -27,7 +25,6 @@ def run_standalone_app(
 
     app_title = 'TMH Predicton Tool'
 
-    # Assign layout
     app.layout = app_page_layout(
         page_layout=layout(),
         app_title=app_title,
@@ -36,10 +33,8 @@ def run_standalone_app(
         **header_colors()
     )
 
-    # Register all callbacks
     callbacks(app)
 
-    # return app object
     return app
 
 
@@ -59,21 +54,6 @@ def app_page_layout(page_layout,
                 children=[
                     html.Div(
                         children=[
-                            #html.A(
-                            #    id='dashbio-logo', children=[
-                            #        #html.Img(
-                            #        #    src='data:image/png;base64,{}'.format(
-                            #        #        base64.b64encode(
-                            #        #            open(
-                            #        #                './assets/molecule_icon2.png', 'rb'
-                            #        #            ).read()
-                            #        #        ).decode()
-                            #        #    ),
-                            #        #    height='auto', alt='',
-                            #        #    style={'max-width': '8%', 'overflow': 'hidden'}
-                            #        #)],
-                            #    href="/Portal" if standalone else "/dash-bio"
-                            #),
                             html.H3(
                                 app_title,
                                 style={'text-align': 'center', 'font-size': '2.0rem', 'margin-top': '0 auto', 'margin-bottom': '0 auto',}
@@ -84,7 +64,7 @@ def app_page_layout(page_layout,
                             'display': 'flex',
                             'align-items': 'center',
                             #'justify-content': 'flex-around'
-                        } #'justify-content': 'flex-start'
+                        } 
                     )
                 ],
                 style={
